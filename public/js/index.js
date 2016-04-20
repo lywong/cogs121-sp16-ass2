@@ -1,4 +1,4 @@
-(function($) {
+(function(d3) {
   "use strict";
 
   var data = [
@@ -72,8 +72,12 @@
 
   // ASSIGNMENT PART 1B
   // Grab the delphi data from the server
-  $.get( "/delphidata", function(data) {
+  d3.json("/delphidata", function(err, data) {
+    if (err) {
+      console.log(err);
+      return;
+    }
     console.log("Data", data);
   });
 
-})($);
+})(d3);
