@@ -47,7 +47,7 @@ app.get('/delphidata', function (req, res) {
   //connect to DELPHI Database
   var pg = require('pg');
 
-  var conString = process.env.DATABASE_CONNECTION_URL:
+  var conString = process.env.DATABASE_CONNECTION_URL;
 
   var client = new pg.Client(conString);
   client.connect(function(err) {
@@ -58,14 +58,13 @@ app.get('/delphidata', function (req, res) {
     total number of respondents for each gender from the Smoking 
     Prevalence in Adults table from 1984-2013. */
     /*cdph_smoking_prevalence_in_adults_1984_2013*/
-    client.query('SELECT number_of_respondents integer 
-      FROM cdph_smoking_prevalence_in_adults_1984_2013 
-      WHERE year integer = 2003' , function(err, result) {
+    client.query('SELECT gender, number_of_respondents FROM cogs121_16_raw.cdph_smoking_prevalence_in_adults_1984_2013 AS value WHERE value.year = 2003' , function(err, result) {
       if(err) {
         return console.error('error running query', err);
       }
+      console.log(result);
       /* change this */
-      console.log(result.rows[0].theTime);
+      /*console.log(result.rows[0].theTime);*/
       //output: Tue Jan 15 2013 19:12:47 GMT-600 (CST)
       client.end();
     });
